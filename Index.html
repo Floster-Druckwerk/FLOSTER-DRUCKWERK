@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Floster-Druckwerk – 3D-Druck & Sonderanfertigungen</title>
+  <meta name="description" content="3D-Druck, Sonderanfertigungen, Prototypen, Darts-Pokale und personalisierte Geschenke – schnell, sauber, regional." />
+  <style>
+    :root{
+      --bg:#07090c;
+      --panel:rgba(255,255,255,.06);
+      --panel2:rgba(255,255,255,.08);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --line:rgba(255,255,255,.12);
+      --accent:#66e3ff;
+      --accent2:#7cffb6;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius:18px;
+      --radius2:26px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 600px at 70% -10%, rgba(102,227,255,.18), transparent 55%),
+                  radial-gradient(900px 500px at 10% 10%, rgba(124,255,182,.10), transparent 52%),
+                  linear-gradient(180deg, #05070a, #07090c 40%, #05070a);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px}
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(7,9,12,.55);
+      border-bottom:1px solid var(--line);
+    }
+    .topbar .inner{display:flex;align-items:center;justify-content:space-between;gap:16px; padding:14px 24px; max-width:1120px; margin:0 auto;}
+    .brand{display:flex;align-items:center;gap:12px; text-decoration:none}
+    .logo{
+      width:40px;height:40px;border-radius:14px;
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.25), transparent 60%),
+        linear-gradient(135deg, rgba(102,227,255,.9), rgba(124,255,182,.85));
+      box-shadow: 0 12px 28px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo:after{
+      content:"";
+      position:absolute; inset:-30%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+      transform: rotate(25deg);
+      animation: shine 4.5s linear infinite;
+    }
+    @keyframes shine { 0%{transform:translateX(-40%) rotate(25deg)} 100%{transform:translateX(40%) rotate(25deg)} }
+    .brand b{letter-spacing:.3px}
+    .brand small{display:block;color:var(--muted);margin-top:2px;font-size:12px}
+    nav{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    nav a{
+      text-decoration:none;
+      padding:10px 12px;
+      border:1px solid transparent;
+      border-radius:999px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    nav a:hover{border-color:var(--line); color:var(--text); background:rgba(255,255,255,.04)}
+    .btn{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:12px 16px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      text-decoration:none;
+      font-weight:600;
+    }
+    .btn.primary{
+      border-color: rgba(102,227,255,.30);
+      background: linear-gradient(135deg, rgba(102,227,255,.20), rgba(124,255,182,.12));
+    }
+    .btn:hover{transform: translateY(-1px); transition:.15s ease}
+    .hero{
+      padding:54px 0 28px;
+      position:relative;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .card{
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .pad{padding:26px}
+    h1{
+      margin:0 0 10px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height:1.06;
+      letter-spacing:-.6px;
+    }
+    .lead{color:var(--muted); font-size:16px; line-height:1.6; max-width:62ch}
+    .badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .badge{
+      font-size:13px; color:rgba(255,255,255,.85);
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+    }
+    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+    .mock{
+      height:100%;
+      background:
+        radial-gradient(500px 220px at 50% 20%, rgba(102,227,255,.18), transparent 55%),
+        radial-gradient(360px 240px at 35% 70%, rgba(124,255,182,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      position:relative;
+      min-height:320px;
+    }
+    .drops{
+      position:absolute; inset:0;
+      background-image:
+        radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.22), transparent 60%),
+        radial-gradient(1.6px 1.6px at 25% 42%, rgba(255,255,255,.18), transparent 60%),
+        radial-gradient(2.2px 2.2px at 55% 30%, rgba(255,255,255,.22), transparent 60%),
+        radial-gradient(1.4px 1.4px at 72% 55%, rgba(255,255,255,.16), transparent 60%),
+        radial-gradient(2.1px 2.1px at 84% 28%, rgba(255,255,255,.20), transparent 60%),
+        radial-gradient(1.2px 1.2px at 40% 72%, rgba(255,255,255,.14), transparent 60%),
+        radial-gradient(2.0px 2.0px at 62% 78%, rgba(255,255,255,.20), transparent 60%);
+      opacity:.9;
+      filter: blur(.1px);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.15));
+    }
+    .mock .chip{
+      position:absolute;
+      left:22px; right:22px; bottom:22px;
+      border-radius: 20px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      backdrop-filter: blur(10px);
+      padding:16px;
+    }
+    .chip b{display:block; font-size:14px; margin-bottom:6px}
+    .chip span{color:var(--muted); font-size:13px; line-height:1.5}
+    section{padding:22px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin:22px 0 10px;
+    }
+    .section-title h2{margin:0; font-size:22px}
+    .section-title p{margin:0; color:var(--muted); font-size:14px}
+    .cols{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .mini{
+      padding:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      min-height:140px;
+    }
+    .mini h3{margin:0 0 8px; font-size:16px}
+    .mini p{margin:0; color:var(--muted); font-size:14px; line-height:1.55}
+    .mini ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:14px; line-height:1.6}
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:12px;
+    }
+    .ph{
+      border-radius: 16px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,.02)),
+        radial-gradient(300px 120px at 30% 30%, rgba(102,227,255,.16), transparent 55%),
+        radial-gradient(260px 120px at 70% 70%, rgba(124,255,182,.10), transparent 60%);
+      height:110px;
+      position:relative;
+      overflow:hidden;
+    }
+    .ph:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.16), transparent 55%);
+      transform: rotate(20deg);
+      opacity:.8;
+    }
+    .contact{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+    }
+    label{display:block; font-size:13px; color:var(--muted); margin:10px 0 6px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius: 14px;
+      border:1px solid var(--line);
+      background: rgba(0,0,0,.35);
+      color:var(--text);
+      outline:none;
+    }
+    input:focus, textarea:focus{border-color: rgba(102,227,255,.35)}
+    textarea{min-height:120px; resize:vertical}
+    .note{color:var(--muted); font-size:13px; line-height:1.55}
+    .footer{
+      border-top:1px solid var(--line);
+      margin-top:26px;
+      padding:18px 0 26px;
+      color:var(--muted);
+      font-size:13px;
+      display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap;
+    }
+    .wa-float{
+      position:fixed; right:18px; bottom:18px; z-index:60;
+      border-radius:999px;
+      padding:12px 14px;
+      background: rgba(0,0,0,.55);
+      border:1px solid rgba(255,255,255,.16);
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow);
+      text-decoration:none;
+      display:flex; align-items:center; gap:10px;
+    }
+    .dot{
+      width:10px; height:10px; border-radius:99px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.35), transparent 60%),
+                  linear-gradient(135deg, var(--accent), var(--accent2));
+    }
+
+    @media (max-width: 960px){
+      .grid{grid-template-columns:1fr}
+      .cols{grid-template-columns:1fr}
+      .gallery{grid-template-columns: repeat(2, 1fr)}
+      .contact{grid-template-columns:1fr}
+      nav{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <b>Floster-Druckwerk</b>
+          <small>3D-Druck • Sonderanfertigungen • Prototypen</small>
+        </div>
+      </a>
+
+      <nav aria-label="Hauptnavigation">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#galerie">Galerie</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <a class="btn primary" href="#kontakt">Angebot anfragen</a>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="grid">
+        <div class="card">
+          <div class="pad">
+            <h1>Individuelle 3D-Drucke, die nicht nach „Standard-STL“ aussehen.</h1>
+            <p class="lead">
+              Von praktischen Halterungen bis zu einzigartigen Darts-Pokalen, Namensschildern oder Geschenk-Ideen:
+              Du sagst, was du brauchst — ich druck’s sauber, stabil und mit Liebe zum Detail.
+            </p>
+
+            <div class="badges">
+              <span class="badge">PETG • PLA • TPU</span>
+              <span class="badge">Mehrfarbig (AMS)</span>
+              <span class="badge">Schnelle Umsetzung</span>
+              <span class="badge">Regional & direkt</span>
+            </div>
+
+            <div class="actions">
+              <a class="btn primary" href="#kontakt">📩 Anfrage schicken</a>
+              <a class="btn" href="#galerie">🧩 Beispiele ansehen</a>
+            </div>
+
+            <p class="note" style="margin-top:14px">
+              Tipp: Wenn du schon eine Idee hast, schick Maße/Fotos/Skizze — dann geht’s richtig schnell.
+            </p>
+          </div>
+        </div>
+
+        <div class="card mock" aria-label="Vorschau-Bereich">
+          <div class="drops" aria-hidden="true"></div>
+          <div class="chip">
+            <b>Heute beliebt:</b>
+            <span>
+              Darts-Pokale • Handyhalter • Bier-Untersetzer • Ersatzteile • Logos/Schriftzüge • Personalisierte Geschenke
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="leistungen">
+      <div class="section-title">
+        <h2>Leistungen</h2>
+        <p>Was du bei mir bekommst</p>
+      </div>
+
+      <div class="cols">
+        <div class="mini">
+          <h3>🛠️ Sonderanfertigungen</h3>
+          <p>Individuelle Teile nach Maß: Halterungen, Adapter, Reparatur-Teile, Abdeckungen, Clips & mehr.</p>
+          <ul>
+            <li>Maße/Foto reichen oft aus</li>
+            <li>Robust je nach Einsatz (PETG/TPU)</li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <h3>🏆 Darts & Pokale</h3>
+          <p>Einzigartige Designs für Turniere, Vereinsabende oder Geschenke — gerne mit Namen/Logo.</p>
+          <ul>
+            <li>Mehrfarbig möglich</li>
+            <li>Optional Sockel + Plakette</li>
+          </ul>
+        </div>
+
+        <div class="mini">
+          <h3>📐 Design & Prototyping</h3>
+          <p>Von der Idee zur Datei: einfache CAD-Konstruktionen, Anpassungen, Iterationen.</p>
+          <ul>
+            <li>STL/3MF-Anpassungen</li>
+            <li>Passform-Tests & Verbesserungen</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ablauf">
+      <div class="section-title">
+        <h2>Ablauf</h2>
+        <p>So läuft’s meistens am entspanntesten</p>
+      </div>
+
+      <div class="cols">
+        <div class="mini">
+          <h3>1) Anfrage</h3>
+          <p>Du schickst kurz: was, wofür, Maße/Foto/Skizze, gewünschtes Material & Farbe.</p>
+        </div>
+        <div class="mini">
+          <h3>2) Vorschlag + Preis</h3>
+          <p>Du bekommst eine klare Rückmeldung: Machbarkeit, Dauer, Preis, ggf. 1–2 Design-Optionen.</p>
+        </div>
+        <div class="mini">
+          <h3>3) Druck & Übergabe</h3>
+          <p>Ich drucke, prüfe, entgrate bei Bedarf — Abholung oder Versand nach Absprache.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="galerie">
+      <div class="section-title">
+        <h2>Galerie</h2>
+        <p>Platzhalter — hier kannst du später echte Fotos einsetzen</p>
+      </div>
+
+      <div class="gallery">
+        <div class="ph" title="Projekt 1"></div>
+        <div class="ph" title="Projekt 2"></div>
+        <div class="ph" title="Projekt 3"></div>
+        <div class="ph" title="Projekt 4"></div>
+        <div class="ph" title="Projekt 5"></div>
+        <div class="ph" title="Projekt 6"></div>
+        <div class="ph" title="Projekt 7"></div>
+        <div class="ph" title="Projekt 8"></div>
+      </div>
+
+      <p class="note" style="margin-top:12px">
+        Bilder einbauen: Ersetze die Platzhalter-Divs durch <code>&lt;img src="..."&gt;</code> oder setz im CSS Hintergrundbilder.
+      </p>
+    </section>
+
+    <section id="kontakt">
+      <div class="section-title">
+        <h2>Kontakt</h2>
+        <p>Schreib kurz — je genauer, desto schneller</p>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <div class="pad">
+            <form id="contactForm">
+              <label for="name">Name</label>
+              <input id="name" name="name" placeholder="Dein Name" autocomplete="name" />
+
+              <label for="email">E-Mail</label>
+              <input id="email" name="email" placeholder="name@mail.de" type="email" autocomplete="email" />
+
+              <label for="msg">Dein Projekt</label>
+              <textarea id="msg" name="msg" placeholder="Was brauchst du? Maße? Material? Farbe? Einsatz (innen/außen)?"></textarea>
+
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px">
+                <button class="btn primary" type="submit">✉️ Nachricht vorbereiten</button>
+                <a class="btn" id="mailtoLink" href="#" aria-disabled="true">📨 Mail öffnen</a>
+              </div>
+
+              <p class="note" style="margin-top:10px">
+                Hinweis: Das Formular verschickt nichts automatisch (keine Server-Anbindung). Es erstellt dir nur eine Mail.
+              </p>
+            </form>
+          </div>
+        </div>
+
+        <div class="mini">
+          <h3>📍 Infos</h3>
+          <p class="note">
+            <b>Ort:</b> (hier eintragen)<br/>
+            <b>WhatsApp:</b> (Nummer eintragen)<br/>
+            <b>E-Mail:</b> (Adresse eintragen)<br/>
+            <b>Zeiten:</b> nach Absprache
+          </p>
+
+          <div style="margin-top:14px">
+            <h3>💡 Anfrage-Checkliste</h3>
+            <ul>
+              <li>Wofür ist das Teil (Belastung/Hitze/Outdoor)?</li>
+              <li>Maße oder Foto mit Lineal</li>
+              <li>Farbe & Material (PLA/PETG/TPU)</li>
+              <li>Stückzahl & Deadline</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>© <span id="year"></span> Floster-Druckwerk</span>
+        <span><a href="#" onclick="alert('Impressum/Datenschutz: hier später verlinken oder einfügen.'); return false;">Impressum</a> · <a href="#" onclick="alert('Datenschutz: hier später verlinken oder einfügen.'); return false;">Datenschutz</a></span>
+      </div>
+    </section>
+  </main>
+
+  <!-- WhatsApp Floating Button (Nummer unten im Code anpassen) -->
+  <a class="wa-float" id="waBtn" href="#" target="_blank" rel="noopener">
+    <span class="dot" aria-hidden="true"></span>
+    <span style="font-weight:700">WhatsApp</span>
+    <span style="color:var(--muted); font-size:13px">direkt anfragen</span>
+  </a>
+
+  <script>
+    // === Einstellungen (HIER ANPASSEN) ===
+    const BUSINESS_EMAIL = "deine-email@domain.de";
+    const WHATSAPP_NUMBER_INTL = "4915112345678"; // ohne +, z.B. 49 + Nummer
+    const BUSINESS_NAME = "Floster-Druckwerk";
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // WhatsApp Link
+    const waText = encodeURIComponent(`Hi ${BUSINESS_NAME}! Ich hätte eine Anfrage:\n\n- Projekt:\n- Maße/Foto:\n- Material/Farbe:\n- Stückzahl:\n- Deadline:\n`);
+    const waUrl = `https://wa.me/${WHATSAPP_NUMBER_INTL}?text=${waText}`;
+    const waBtn = document.getElementById("waBtn");
+    waBtn.href = waUrl;
+
+    // Mailto aus Formular bauen (kein echtes Senden)
+    const form = document.getElementById("contactForm");
+    const mailtoLink = document.getElementById("mailtoLink");
+
+    function updateMailto(){
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const msg = document.getElementById("msg").value.trim();
+
+      const subject = encodeURIComponent(`Anfrage 3D-Druck – ${name || "ohne Name"}`);
+      const body = encodeURIComponent(
+        `Hallo ${BUSINESS_NAME},\n\n` +
+        `ich hätte folgende Anfrage:\n\n` +
+        `${msg || "(Bitte Projektbeschreibung ergänzen)"}\n\n` +
+        `Kontakt:\n` +
+        `Name: ${name || "-"}\n` +
+        `E-Mail: ${email || "-"}\n\n` +
+        `Viele Grüße\n${name || ""}`
+      );
+
+      mailtoLink.href = `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+      mailtoLink.style.opacity = "1";
+      mailtoLink.style.pointerEvents = "auto";
+    }
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      updateMailto();
+      // Optional: direkt Mail-App öffnen
+      window.location.href = mailtoLink.href;
+    });
+
+    ["name","email","msg"].forEach(id => {
+      document.getElementById(id).addEventListener("input", updateMailto);
+    });
+
+    // initial
+    updateMailto();
+  </script>
+</body>
+</html>
